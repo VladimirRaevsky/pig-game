@@ -218,3 +218,11 @@ main {
   opacity: 0;
   z-index: -1;
 }
+
+.total {
+  position: absolute;
+  width: 50px;
+  height: 25px;
+  color: red;
+  font-size: 32px;
+}
