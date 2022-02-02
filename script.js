@@ -11,6 +11,7 @@ const divCurrent = document.querySelectorAll('.current');
 const totalDiv = document.querySelector('.total');
 
 let activePlayer, currentScore, totalScore, play, total;
+
 newGame();
 
 btnRoll.addEventListener('click', rollTheDice);
@@ -42,7 +43,18 @@ function leaveGlasses() {
       `score--${activePlayer}`
     );
     const currentPlayer = document.getElementById(`current--${activePlayer}`);
+    const itRemainsToScorePoints = document.querySelector(
+      `.points-left--${activePlayer}`
+    );
 
+    if ((total - totalScore[activePlayer]) <= 20) {
+      itRemainsToScorePoints.style.backgroundColor = 'rgb(77, 230, 31)';
+    } 
+    if ((total - totalScore[activePlayer]) <= 10) {
+      itRemainsToScorePoints.style.backgroundColor = 'red';
+    }
+
+    itRemainsToScorePoints.textContent = total - totalScore[activePlayer];
     currentTotalScorePlayer.textContent = totalScore[activePlayer];
 
     if (totalScore[activePlayer] >= total) {
@@ -50,6 +62,7 @@ function leaveGlasses() {
         divCurrent[i].classList.remove('active');
       }
 
+      aquamarineBackground();
       dice.classList.add('hidden');
 
       for (let i = 0; i < bothPlayers.length; i++) {
@@ -90,12 +103,12 @@ function changePlayer(player) {
 }
 
 function newGame() {
+  total = 0;
+  totalDiv.textContent = total;
   activePlayer = 0;
   currentScore = 0;
   totalScore = [0, 0];
   play = true;
-  total = 30;
-  totalDiv.textContent = total;
   btnHold.disabled = true;
   dice.classList.add('hidden');
 
@@ -107,6 +120,7 @@ function newGame() {
   document.getElementById('score--1').textContent = currentScore;
   document.getElementById('current--0').textContent = currentScore;
   document.getElementById('current--1').textContent = currentScore;
+  aquamarineBackground();
 
   for (let i = 0; i < bothPlayers.length; i++) {
     bothPlayers[i].classList.remove('player--winner', 'player--losing');
@@ -120,4 +134,23 @@ function newGame() {
 
   btnRoll.style.display = 'block';
   btnHold.style.display = 'block';
+
+  setTimeout(() => {
+    total = Number(prompt('Введите число до которого играем!'));
+    if (total) {
+      totalDiv.textContent = total;
+      play = true;
+      return;
+    }
+    play = false;
+  }, 2000);
+}
+
+function aquamarineBackground() {
+  document.querySelector(`.points-left--0`).style.backgroundColor =
+    'Aquamarine';
+  document.querySelector(`.points-left--1`).style.backgroundColor =
+    'Aquamarine';
+  document.querySelector(`.points-left--0`).textContent = 0;
+  document.querySelector(`.points-left--1`).textContent = 0;
 }

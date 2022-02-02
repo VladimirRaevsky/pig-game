@@ -43,6 +43,11 @@ main {
   transition: all 0.75s;
 }
 
+.player span {
+  font-size: 25px;
+  color: rgb(27, 29, 29);
+  margin-bottom: 10px;
+}
 /* Elements */
 .name {
   position: relative;
@@ -221,8 +226,16 @@ main {
 
 .total {
   position: absolute;
-  width: 50px;
-  height: 25px;
-  color: red;
-  font-size: 32px;
+  color: rgb(255, 255, 255);
+  font-size: 42px;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 15%;
+}
+
+.points-left {
+  background-color: Aquamarine;
+  font-size: 30px;
+  color: blanchedalmond;
+  padding: 10px;
 }
